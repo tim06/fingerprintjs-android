@@ -3,6 +3,7 @@ package com.fingerprintjs.android.fingerprint.fingerprinting_signals
 import com.fingerprintjs.android.fingerprint.Fingerprinter
 import com.fingerprintjs.android.fingerprint.info_providers.*
 import com.fingerprintjs.android.fingerprint.signal_providers.StabilityLevel
+import kotlin.collections.forEach
 
 
 // region: Hardware signals
@@ -524,7 +525,7 @@ public class ApplicationsListSignal(
 
         value
             .sortedBy { it.packageName }
-            .forEach { sb.append(it.packageName) }
+            .forEach { sb.append("${it.packageName};") }
 
         return sb.toString()
     }
@@ -549,7 +550,7 @@ public class SystemApplicationsListSignal(
 
         value
             .sortedBy { it.packageName }
-            .forEach { sb.append(it.packageName) }
+            .forEach { sb.append("${it.packageName};") }
 
         return sb.toString()
     }
@@ -974,7 +975,7 @@ public class AvailableLocalesSignal(
     override fun getHashableString(): String {
         val sb = StringBuilder()
         value.forEach {
-            sb.append(it)
+            sb.append("$it;")
         }
         return sb.toString()
     }

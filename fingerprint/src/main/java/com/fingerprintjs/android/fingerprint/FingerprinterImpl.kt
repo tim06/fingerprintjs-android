@@ -135,7 +135,9 @@ internal class FingerprinterImpl internal constructor(
 
     private fun Hasher.hash(fingerprintingSignals: List<FingerprintingSignal<*>>): String {
         val joinedString =
-            fingerprintingSignals.joinToString(separator = "") { it.getHashableString() }
+            fingerprintingSignals.joinToString(separator = ";\n") { signal ->
+                "${signal::class.simpleName}=${signal.getHashableString()}"
+            }
         return this.hash(joinedString)
     }
 }
